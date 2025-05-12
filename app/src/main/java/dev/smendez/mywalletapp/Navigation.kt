@@ -8,9 +8,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dev.smendez.mywalletapp.screens.HelpCenterScreen
 import dev.smendez.mywalletapp.screens.HomeScreen
 import dev.smendez.mywalletapp.screens.LoginScreen
+import dev.smendez.mywalletapp.screens.ProfileScreen
 import dev.smendez.mywalletapp.screens.RegisterScreen
+import dev.smendez.mywalletapp.screens.SecurityScreen
+import dev.smendez.mywalletapp.screens.SettingsScreen
 import dev.smendez.mywalletapp.screens.SplashScreen
 import dev.smendez.mywalletapp.screens.WelcomeScreen
 
@@ -61,6 +65,10 @@ fun AppNavigation() {
         composable(Screens.LoginScreen.name) { LoginScreen(navController) }
         composable(Screens.RegisterScreen.name) { RegisterScreen(navController) }
         composable(Screens.HomeScreen.name) { HomeScreen(navController) }
+        composable(Screens.ProfileScreen.name) { ProfileScreen(navController) }
+        composable(Screens.SettingsScreen.name) { SettingsScreen() }
+        composable(Screens.SecurityScreen.name) { SecurityScreen() }
+        composable(Screens.HelpCenterScreen.name) { HelpCenterScreen() }
 
 
     }

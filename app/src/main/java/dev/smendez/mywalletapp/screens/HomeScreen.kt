@@ -45,6 +45,8 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import dev.smendez.mywalletapp.Screens
 import dev.smendez.mywalletapp.ui.theme.HomeTopAppBar
 
 
@@ -52,9 +54,12 @@ import dev.smendez.mywalletapp.ui.theme.HomeTopAppBar
 @Composable
 fun HomeScreen(navController: NavHostController) {
     Scaffold(
-        topBar = { HomeTopBar() },
+        topBar = { HomeTopBar(navController) },
         bottomBar = { BottomNavBar() }
-    ) { innerPadding ->
+    )
+
+
+    { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -121,14 +126,63 @@ fun HomeScreen(navController: NavHostController) {
 // 🔹 **TopBar Azul con Menú**
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeTopBar() {
+fun HomeTopBar (navController: NavHostController) {
+    var expanded by remember { mutableStateOf(false) }
+
+
     TopAppBar(
         title = { Text(text = "Hola, Sofía", color = Color.White) },
         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF0057B8)),
         actions = {
-            IconButton(onClick = { /* Menú Opciones */ }) {
-                Icon(Icons.Default.MoreVert, contentDescription = "Menú", tint = Color.White)
+            Box {
+                IconButton(onClick = { expanded = true }) {
+                    Icon(Icons.Default.MoreVert, contentDescription = "Menú", tint = Color.White)
+                }
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("Mi perfil") },
+                        onClick = {
+                            expanded = false
+
+                            {navController.navigate(Screens.ProfileScreen.name)}
+                            // Navegar a pantalla de perfil
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Configuración") },
+                        onClick = {
+                            expanded = false
+                            // Acción
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Seguridad") },
+                        onClick = {
+                            expanded = false
+                            // Acción
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Centro de ayuda") },
+                        onClick = {
+                            expanded = false
+                            // Acción
+                        }
+                    )
+                    Divider()
+                    DropdownMenuItem(
+                        text = { Text("Cerrar sesión", color = Color.Red) },
+                        onClick = {
+                            expanded = false
+                            // Acción de logout
+                        }
+                    )
+                }
             }
+
         }
     )
 }

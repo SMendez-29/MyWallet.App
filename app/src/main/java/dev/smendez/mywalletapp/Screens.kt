@@ -8,4 +8,8 @@ sealed class Screens(val name : String) {
     object LoginScreen : Screens ("login")
     object RegisterScreen : Screens ("register")
     object HomeScreen : Screens ("home")
+    object ProfileScreen : Screens("profile")
+    object SettingsScreen : Screens("settings")
+    object SecurityScreen : Screens("security")
+    object HelpCenterScreen : Screens("help_center")
 }
